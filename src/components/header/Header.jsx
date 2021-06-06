@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
-import './header.css';
 import headerLogo from './header-logo.svg';
+import styled from 'styled-components';
 
 class Header extends Component {
-    render() { 
+    render() {
+
+        const Header = styled.div`
+            display: flex;
+            justify-content: center;
+            margin: 50px 0;
+        `;
+
         return ( 
-            <div className="header">
+            <Header>
                 <img src={headerLogo} alt="aviasales test task" />
-            </div>
+            </Header>
          );
     }
 }
