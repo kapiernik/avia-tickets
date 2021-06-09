@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import inputImage from './input.svg';
+import checkedInputImage from './checkedInput.svg';
 
 
 class Filter extends Component {
@@ -39,7 +41,19 @@ class Filter extends Component {
         `;
 
         const Input = styled.input`
+            position: absolute;
+            -webkit-appearance: none;
+            appearance: none;
+        `;
+
+        const CheckBox = styled.span`
             margin-right: 10px;
+            width: 20px;
+            height: 20px;
+            background-image: url(${inputImage});
+            input:checked + & {
+                background-image: url(${checkedInputImage});
+            }
         `;
 
         return ( 
@@ -50,18 +64,22 @@ class Filter extends Component {
                 <Form>
                     <Label>
                         <Input type="checkbox" />
+                        <CheckBox></CheckBox>
                         Все
                     </Label>
                     <Label>
                         <Input type="checkbox" />
+                        <CheckBox></CheckBox>
                         Все
                     </Label>
                     <Label>
                         <Input type="checkbox" />
+                        <CheckBox></CheckBox>
                         Все
                     </Label>
                     <Label>
                         <Input type="checkbox" />
+                        <CheckBox></CheckBox>
                         Все
                     </Label>
                 </Form>
