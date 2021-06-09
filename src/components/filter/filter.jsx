@@ -71,17 +71,17 @@ class Filter extends Component {
                     <Label>
                         <Input type="checkbox" />
                         <CheckBox></CheckBox>
-                        Все
+                         1 пересадка
                     </Label>
                     <Label>
                         <Input type="checkbox" />
                         <CheckBox></CheckBox>
-                        Все
+                        2 пересадки
                     </Label>
                     <Label>
                         <Input type="checkbox" />
                         <CheckBox></CheckBox>
-                        Все
+                        3 пересадки
                     </Label>
                 </Form>
             </Filter>
