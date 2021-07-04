@@ -8,10 +8,12 @@ class Filter extends Component {
     render() { 
 
         const Filter = styled.div`
-            max-width: 300px;
+            display: inline-block;
+            width: 300px;
             background-color: #FFF;
             box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, .1);
             padding-bottom: 10px;
+            margin-right: 20px;
         `;
 
         const Title = styled.h3`
