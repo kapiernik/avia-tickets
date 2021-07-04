@@ -2,10 +2,20 @@ import React, { Component } from 'react';
 // import styled from 'styled-components';
 import Header from '../header';
 import Filter from '../filter';
-import { Container, Col, Row } from 'reactstrap';
+import Tabs from '../tabs';
+import styled from 'styled-components';
 
 class App extends Component {
-  render() { 
+  render() {
+    
+    const Container = styled.div`
+      max-width: 1250px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: row;
+      align-items: start;
+      justify-content: center;
+    `;
 
     return (
       <>
@@ -13,9 +23,8 @@ class App extends Component {
           <Header />
         </Container>
         <Container>
-          <Col>
-            <Filter />
-          </Col>
+          <Filter />
+          <Tabs />
         </Container>
       </>
      );
