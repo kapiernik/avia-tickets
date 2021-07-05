@@ -7,6 +7,29 @@ import Ticket from '../ticket';
 import styled from 'styled-components';
 
 class App extends Component {
+
+  state = {
+    tickets: [],
+    stop: false
+  }
+
+  async componentDidMount(){
+    const searchId = await fetch('https://front-test.beta.aviasales.ru/search')
+      .then(response => response.json())
+      .then(response => response.searchId);
+
+    await fetch(`https://front-test.beta.aviasales.ru/tickets?searchId=${searchId}`)
+      .then(response => response.json())
+      .then(response => {
+        this.setState({ 
+          tickets: response.tickets,
+          stop: response.stop
+        });
+      })
+
+    console.log(this.state);
+  }
+
   render() {
     
     const Container = styled.div`
