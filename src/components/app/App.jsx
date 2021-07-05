@@ -3,12 +3,14 @@ import React, { Component } from 'react';
 import Header from '../header';
 import Filter from '../filter';
 import Tabs from '../tabs';
+import Ticket from '../ticket';
 import styled from 'styled-components';
 
 class App extends Component {
   render() {
     
     const Container = styled.div`
+      width: 1000px;
       max-width: 1250px;
       margin: 0 auto;
       display: flex;
@@ -17,14 +19,28 @@ class App extends Component {
       justify-content: center;
     `;
 
+    const Column = styled.div`
+      display: flex;
+      flex-direction: column;
+    `;
+
     return (
       <>
         <Container>
           <Header />
         </Container>
         <Container>
-          <Filter />
-          <Tabs />
+          <Column>
+            <Filter />
+          </Column>
+          <Column>
+            <Tabs />
+            <Ticket />
+            <Ticket />
+            <Ticket />
+            <Ticket />
+            <Ticket />
+          </Column>
         </Container>
       </>
      );
