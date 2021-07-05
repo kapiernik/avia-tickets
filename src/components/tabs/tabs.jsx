@@ -6,13 +6,14 @@ const Button = styled.button`
     background-color: ${props => props.active ? '#2196F3' : '#FFF'};
     color: ${props => props.active ? '#FFF' : '#4A4A4A'};
     padding: 15px;
-    border: 1px solid #b4b4b4;
+    border: 1px solid #DFE5EC;
     font-weight: 600;
     font-size: 12px;
     letter-spacing: 0.5px;
     text-transform: uppercase;
     user-select: ${props => props.active ? 'none' : 'auto'};
     cursor: ${props => props.active ? 'default' : 'pointer'};
+    margin-bottom: 13px;
     &:active{
         background-color: #2196F3 !important;
         color: #FFF;
