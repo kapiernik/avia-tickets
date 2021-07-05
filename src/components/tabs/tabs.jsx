@@ -14,6 +14,7 @@ const Button = styled.button`
     user-select: ${props => props.active ? 'none' : 'auto'};
     cursor: ${props => props.active ? 'default' : 'pointer'};
     margin-bottom: 13px;
+    transition: all 0.2s;
     &:active{
         background-color: #2196F3 !important;
         color: #FFF;
