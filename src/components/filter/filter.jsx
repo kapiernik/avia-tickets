@@ -12,8 +12,9 @@ class Filter extends Component {
             max-width: 232px;
             background-color: #FFF;
             box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, .1);
-            padding-bottom: 10px;
+            padding-bottom: 20px;
             margin-right: 20px;
+            border-radius: 5px;
         `;
 
         const Title = styled.h3`
@@ -69,6 +70,11 @@ class Filter extends Component {
                         <Input type="checkbox" />
                         <CheckBox></CheckBox>
                         Все
+                    </Label>
+                    <Label>
+                        <Input type="checkbox" />
+                        <CheckBox></CheckBox>
+                        Без пересадок
                     </Label>
                     <Label>
                         <Input type="checkbox" />
