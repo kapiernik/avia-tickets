@@ -82,10 +82,25 @@ class Ticket extends Component {
         const arrivalDateinMilliSeconds = new Date(date).setMinutes(duration); 
         const arrivalDate = new Date(arrivalDateinMilliSeconds); // Дата отправки в нормальном формате
 
-        const departureHour = departureDate.getUTCHours(); // Час отлета по Гринвичу
-        const departureMinutes = departureDate.getUTCMinutes(); // Минута отлета по Гринвичу
-        const arrivalHour = arrivalDate.getUTCHours(); // Час прилета по Гринвичу
-        const arrivalMinutes = arrivalDate.getUTCMinutes(); // Час прилета по Гринвичу
+        let departureHour = departureDate.getUTCHours(); // Час отлета по Гринвичу
+        let departureMinutes = departureDate.getUTCMinutes(); // Минута отлета по Гринвичу
+        let arrivalHour = arrivalDate.getUTCHours(); // Час прилета по Гринвичу
+        let arrivalMinutes = arrivalDate.getUTCMinutes(); // Час прилета по Гринвичу
+
+        // Если количество часов(минут) меньше девяти, прибавляем к ним нолик для красоты
+
+        if(departureHour <= 9){
+            departureHour = `0${departureHour}`;
+        }        
+        if(departureMinutes <= 9){
+            departureMinutes = `0${departureMinutes}`;
+        }        
+        if(arrivalHour <= 9){
+            arrivalHour = `0${arrivalHour}`;
+        }        
+        if(arrivalMinutes <= 9){
+            arrivalMinutes = `0${arrivalMinutes}`;
+        }
 
         return `${departureHour}:${departureMinutes} - ${arrivalHour}:${arrivalMinutes}`;
     }
@@ -104,7 +119,7 @@ class Ticket extends Component {
         }
 
         if(flightDurationMinutes <= 9){
-            flightDurationHours = `0${flightDurationMinutes}`;
+            flightDurationMinutes = `0${flightDurationMinutes}`;
         }
 
         // Если количество минут(часов) равняется нулю, мы их просто не упоминаем
@@ -131,7 +146,7 @@ class Ticket extends Component {
         return ( 
             <TicketBlock>
                 <Price>
-                    {price} Р
+                    {price.toLocaleString()} ₽
                 </Price>
                 <Image src={imageUrl}></Image>
                 <Forth>
