@@ -60,20 +60,65 @@ const Value = styled.h4`
 `;
 
 class Ticket extends Component {
+    
+    renderStopsEnding(value){  
+        value = Math.abs(value) % 100; 
+        const num = value % 10;
+        if(value > 10 && value < 20) return "пересадок"; 
+        if(num > 1 && num < 5) return "пересадки";
+        if(num === 1) return "пересадка"; 
+        return "пересадок";
+    }
+
+    renderFlightTime(date, duration){
+        const departureDate = new Date(date);
+        // const flightDurationHours = Math.floor(duration / 60);
+        // const flightDurationMinutes = duration - (flightDurationHours * 60);
+        const arrivalDateinMilliSeconds = new Date(date).setMinutes(duration);
+        const arrivalDate = new Date(arrivalDateinMilliSeconds);
+
+        const departureHour = departureDate.getUTCHours();
+        const departureMinutes = departureDate.getUTCMinutes();
+        const arrivalHour = arrivalDate.getUTCHours();
+        const arrivalMinutes = arrivalDate.getUTCMinutes();
+
+        return `${departureHour}:${departureMinutes} - ${arrivalHour}:${arrivalMinutes}`;
+    }
+
+    renderFlightDuration(duration){
+        const flightDurationHours = Math.floor(duration / 60);
+        const flightDurationMinutes = duration - (flightDurationHours * 60);
+
+        if(flightDurationMinutes === 0){
+            return `${flightDurationHours} часов`;
+        } else if (flightDurationHours === 0){
+            return `${flightDurationMinutes} минут`;
+        }
+
+        return `${flightDurationHours}ч ${flightDurationMinutes}м`;
+    }
+
     render() {
+
+        const price = this.props.price;
+        const carrier = this.props.carrier;
+        const [forth, back] = this.props.segments;
+
+        const imageUrl = `https://pics.avs.io/99/36/${carrier}.png`;
+
         return ( 
             <TicketBlock>
                 <Price>
-                    13 700 Р
+                    {price} Р
                 </Price>
-                <Image src="https://pics.avs.io/99/36/S7.png"></Image>
+                <Image src={imageUrl}></Image>
                 <Forth>
                     <InfoContainer>
                         <Label route>
-                            IEV - HKT
+                            {forth.origin} - {forth.destination}
                         </Label>
                         <Value route>
-                            23:50 - 4:30
+                            {this.renderFlightTime(forth.date, forth.duration)}
                         </Value>
                     </InfoContainer>
                     <InfoContainer>
@@ -81,41 +126,41 @@ class Ticket extends Component {
                             В пути
                         </Label>
                         <Value length>
-                            23ч 15м
+                            {this.renderFlightDuration(forth.duration)}
                         </Value>
                     </InfoContainer>
                     <InfoContainer>
                         <Label stops>
-                            3 пересадки
+                            {forth.stops.length} {this.renderStopsEnding(forth.stops.length)}
                         </Label>
                         <Value route>
-                            MSK, SPB, ODS
+                            {forth.stops.join(", ")}
                         </Value>
                     </InfoContainer>
                 </Forth>
                 <Back>
                     <InfoContainer>
                         <Label route>
-                            IEV - HKT
+                            {back.origin} - {back.destination}
                         </Label>
                         <Value route>
-                            23:50 - 4:30
+                        {this.renderFlightTime(back.date, back.duration)}
                         </Value>
                     </InfoContainer>
                     <InfoContainer>
-                        <Label length>
+                        <Label duration>
                             В пути
                         </Label>
-                        <Value length>
-                            23ч 15м
+                        <Value duration>
+                            {this.renderFlightDuration(back.duration)}
                         </Value>
                     </InfoContainer>
                     <InfoContainer>
                         <Label stops>
-                            3 пересадки
+                            {back.stops.length} {this.renderStopsEnding(back.stops.length)}
                         </Label>
                         <Value route>
-                            MSK, SPB, ODS
+                            {back.stops.join(", ")}
                         </Value>
                     </InfoContainer>
                 </Back>
