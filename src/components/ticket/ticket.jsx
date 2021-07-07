@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
+// Стили для компонентов
+
 const TicketBlock = styled.div`
     padding: 20px;
     background-color: #ffffff;
@@ -60,34 +62,52 @@ const Value = styled.h4`
 `;
 
 class Ticket extends Component {
+
+    // Склонение слова "пересадка"
     
     renderStopsEnding(value){  
-        value = Math.abs(value) % 100; 
-        const num = value % 10;
-        if(value > 10 && value < 20) return "пересадок"; 
-        if(num > 1 && num < 5) return "пересадки";
-        if(num === 1) return "пересадка"; 
-        return "пересадок";
+        value = Math.abs(value) % 100; // Округленное количество пересадок
+        const num = value % 10; // Окончание числа пересадок (если это просто цифра - то записывается такое же значение)
+        if(value > 10 && value < 20) return "пересадок"; // Если число больше 10 и меньше - то подставляем "пересадок" 
+        if(num > 1 && num < 5) return "пересадки"; // Если число ЗАКАНЧИВАЕТСЯ на число, большее единицы и меньше пяти - то "пересадки"
+        if(num === 1) return "пересадка"; // Если число ЗАКАНЧИВАЕТСЯ на единицу - то "пересадка"
+        return "пересадок"; // В остальном случае - "пересадок"
     }
 
-    renderFlightTime(date, duration){
-        const departureDate = new Date(date);
-        // const flightDurationHours = Math.floor(duration / 60);
-        // const flightDurationMinutes = duration - (flightDurationHours * 60);
-        const arrivalDateinMilliSeconds = new Date(date).setMinutes(duration);
-        const arrivalDate = new Date(arrivalDateinMilliSeconds);
+    // Правильное отображение времени полета
 
-        const departureHour = departureDate.getUTCHours();
-        const departureMinutes = departureDate.getUTCMinutes();
-        const arrivalHour = arrivalDate.getUTCHours();
-        const arrivalMinutes = arrivalDate.getUTCMinutes();
+    renderFlightTime(date, duration){
+        const departureDate = new Date(date); // Дата отлета
+        // Дата отправки в милисекундах после 1 января 1970 года (мы к дате отлета добавляем длительность перелета)
+        const arrivalDateinMilliSeconds = new Date(date).setMinutes(duration); 
+        const arrivalDate = new Date(arrivalDateinMilliSeconds); // Дата отправки в нормальном формате
+
+        const departureHour = departureDate.getUTCHours(); // Час отлета по Гринвичу
+        const departureMinutes = departureDate.getUTCMinutes(); // Минута отлета по Гринвичу
+        const arrivalHour = arrivalDate.getUTCHours(); // Час прилета по Гринвичу
+        const arrivalMinutes = arrivalDate.getUTCMinutes(); // Час прилета по Гринвичу
 
         return `${departureHour}:${departureMinutes} - ${arrivalHour}:${arrivalMinutes}`;
     }
 
+    // Правильное отображение длительности полета
+
     renderFlightDuration(duration){
-        const flightDurationHours = Math.floor(duration / 60);
-        const flightDurationMinutes = duration - (flightDurationHours * 60);
+        let flightDurationHours = Math.floor(duration / 60); // Количество часов полета
+        // Количество оставшихся минут (от данных длительности в минутах отнимаем количество часов перелета в минутах)
+        let flightDurationMinutes = duration - (flightDurationHours * 60);
+
+        // Если количество часов(минут) меньше девяти, прибавляем к ним нолик для красоты
+
+        if(flightDurationHours <= 9){
+            flightDurationHours = `0${flightDurationHours}`;
+        }
+
+        if(flightDurationMinutes <= 9){
+            flightDurationHours = `0${flightDurationMinutes}`;
+        }
+
+        // Если количество минут(часов) равняется нулю, мы их просто не упоминаем
 
         if(flightDurationMinutes === 0){
             return `${flightDurationHours} часов`;
@@ -99,6 +119,8 @@ class Ticket extends Component {
     }
 
     render() {
+
+        // Деструктуризация пропсов
 
         const price = this.props.price;
         const carrier = this.props.carrier;
