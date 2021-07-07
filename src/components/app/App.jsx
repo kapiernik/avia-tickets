@@ -29,21 +29,21 @@ class App extends Component {
   }
 
   async componentDidMount(){
-    const searchId = await fetch('https://front-test.beta.aviasales.ru/search')
+    const searchId = await fetch('https://front-test.beta.aviasales.ru/search') // Запрашиваем SearchID
       .then(response => response.json())
       .then(response => response.searchId);
 
-    await fetch(`https://front-test.beta.aviasales.ru/tickets?searchId=${searchId}`)
+    await fetch(`https://front-test.beta.aviasales.ru/tickets?searchId=${searchId}`) // Запрашиваем билеты
       .then(response => response.json())
       .then(response => {
         this.setState({ 
-          ticketsArray: response.tickets.slice(1, 6),
+          ticketsArray: response.tickets.slice(1, 6), // Запрашиваем первые пять билетов (ВРЕМЕННОЕ РЕШЕНИЕ)
           stop: response.stop
         });
       })
-
-    console.log(this.state.ticketsArray);
   }
+
+  //Уникальный айди для билета
 
   makeId() {
     let text = "";

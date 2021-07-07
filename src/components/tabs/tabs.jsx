@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { ButtonGroup } from 'reactstrap';
 import styled from 'styled-components';
 
+// Стили для компонентов
+
 const Button = styled.button`
     background-color: ${props => props.active ? '#2196F3' : '#FFF'};
     color: ${props => props.active ? '#FFF' : '#4A4A4A'};
